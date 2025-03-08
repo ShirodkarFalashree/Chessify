@@ -5,8 +5,8 @@ import mainbg from "../src/assets/mainbg2.jpg"
 
 const Layout = () => {
   return (
-    <div className="w-screen bg-black min-h-screen  bg-cover " style={{ backgroundImage: `url(${mainbg})` }}>
-      <Navbar />
+    <div className="w-screen bg-black min-h-screen overflow-hidden bg-cover " style={{ backgroundImage: `url(${mainbg})` }}>
+      {/* <Navbar /> */}
       <Outlet />
     </div>
   );

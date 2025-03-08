@@ -1,1 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
 @import "tailwindcss";
+
+/* @font-face {
+  font-family: '"Cinzel"';
+  src: url('/fonts/BlackwoodCastle.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+} */
+
+@theme {
+  --font-heading: Cinzel;
+}
+
+body {
+  font-family: var(--font-heading), sans-serif;
+}

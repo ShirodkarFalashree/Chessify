@@ -5,6 +5,7 @@ import TutorialsPage from "./pages/TutorialsPage";
 
 function App() {
   return (
+
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>

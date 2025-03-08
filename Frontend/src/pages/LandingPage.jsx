@@ -41,7 +41,9 @@ const letterVariants = {
 
 const LandingPage = () => {
   return (
-    <div className="relative w-screen h-screen overflow-x-hidden overflow-y-hidden flex items-center justify-center ">
+    // 
+    <div className="relative flex-grow flex items-center justify-center min-h-[calc(100vh-60px)] overflow-hidden">
+
       {/* Floating Chess Icons (Outside Border) */}
       <div className="absolute inset-0 z-0">
         {icons.map((item, index) => (

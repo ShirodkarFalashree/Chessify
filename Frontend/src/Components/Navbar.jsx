@@ -6,7 +6,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="relative w-screen h-[60px] flex items-center justify-end px-6 pt-8 pr-8">
+    <div className="relative w-screen h-[60px] flex items-center justify-end px-6 pt-8 pr-8 ">
       <div
         className="font-bold text-3xl w-10 cursor-pointer"
         onClick={() => setIsOpen(!isOpen)}

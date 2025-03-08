@@ -29,6 +29,14 @@ const textVariants = {
     transition: { duration: 1, delay },
   }),
 };
+const buttonAni = {
+  hidden: { opacity: 0, y: 50 },
+  visible: (delay) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 2, delay },
+  }),
+};
 
 const letterVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -41,7 +49,7 @@ const letterVariants = {
 
 const LandingPage = () => {
   return (
-    // 
+    
     <div className="relative flex-grow flex items-center justify-center min-h-[calc(100vh-60px)] overflow-hidden">
 
       {/* Floating Chess Icons (Outside Border) */}
@@ -95,9 +103,14 @@ const LandingPage = () => {
           Play against friends, AI, or players worldwide!"
         </motion.div>
 
-        <div className="flex items-center justify-center mt-[30px]">
+        <motion.div className="flex items-center justify-center mt-[30px]"
+        initial="hidden"
+        animate="visible"
+        variants={buttonAni}
+        custom={1.5}
+        >
           <OldButton text={"Play Now"} />
-        </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import chess from "../assets/chess.png";
-import mainbg from "../assets/mainbg1.jpg"
+import navbg from "../assets/navbg.jpeg"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,7 +20,7 @@ const Navbar = () => {
           isOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out shadow-lg`}  
 
-style={{ backgroundImage: `url(${mainbg})` }}      >
+style={{ backgroundImage: `url(${navbg})` }}      >
         <button
           className="absolute top-10 right-8 text-4xl cursor-pointer"
           onClick={() => setIsOpen(false)}

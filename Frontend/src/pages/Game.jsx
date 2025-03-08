@@ -43,19 +43,21 @@ function Game() {
     }
   };
 
-  return (
-    <div className="flex flex-col items-center ">
-      <h1 className="text-2xl font-bold p-4">Multiplayer Chess Game</h1>
-      <p className="text-lg">{playerColor ? `You are playing as ${playerColor === "w" ? "White" : "Black"}` : "Waiting for opponent..."}</p>
-      <Chessboard 
-      
-        position={chess.fen()} 
-        onPieceDrop={(sourceSquare, targetSquare) => handleMove({ from: sourceSquare, to: targetSquare })} 
-        boardOrientation={playerColor === "b" ? "black" : "white"}
-        boardWidth={window.innerWidth < 600 ? 300 : 500} 
-      />
-    </div>
-  );
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-60px)] overfloe-hidden">
+        <h1 className="text-2xl font-bold p-4">Multiplayer Chess Game</h1>
+        <p className="text-lg">{playerColor ? `You are playing as ${playerColor === "w" ? "White" : "Black"}` : "Waiting for opponent..."}</p>
+        <div className="flex justify-center">
+          <Chessboard 
+            position={chess.fen()} 
+            onPieceDrop={(sourceSquare, targetSquare) => handleMove({ from: sourceSquare, to: targetSquare })} 
+            boardOrientation={playerColor === "b" ? "black" : "white"}
+            boardWidth={window.innerWidth < 600 ? 300 : 500} 
+          />
+        </div>
+      </div>
+    );
+    
 }
 
 export default Game;

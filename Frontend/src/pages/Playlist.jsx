@@ -36,7 +36,7 @@ const Playlist = () => {
   }, []);
 
   return (
-    <div className="container mx-auto p-4 flex flex-col items-center text-[#362511]">
+    <div className="container mx-auto p-4 flex flex-col items-center text-[#362511] ">
       <h2 className="text-5xl font-bold mb-4">Chess Tutorials</h2>
       <div className="overflow-x-auto bg-cover p-6" style={{ backgroundImage: `url(${tablebg})` }}>
         <table className="md:w-[1200px]shadow-md rounded-lg " >

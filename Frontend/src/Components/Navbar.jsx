@@ -17,7 +17,7 @@ const Navbar = () => {
 
       {/* Sliding Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-screen w-[580px] backdrop-blur bg-white/60 text-[#362511] z-50 transform p-8 ${
+        className={`fixed top-0 right-0 h-screen md:w-[580px] backdrop-blur bg-white/60 text-[#362511] z-50 transform p-8 ${
           isOpen ? "translate-x-0" : "translate-x-full"
         } transition-transform duration-300 ease-in-out shadow-lg`}
         style={{ backgroundImage: `url(${navbg})` }}

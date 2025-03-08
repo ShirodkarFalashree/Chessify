@@ -80,7 +80,7 @@ const LandingPage = () => {
       <div className="relative z-10  px-12 py-8 bg-opacity-80">
         {/* Animated "CHESSIFY" (Letter by Letter) */}
         <motion.div
-          className="text-[#362511] text-[180px] font-extrabold leading-[220px] font-heading flex justify-center"
+          className="text-[#362511] text-[70px] md:text-[180px] font-extrabold md:leading-[220px] font-heading flex justify-center"
           initial="hidden"
           animate="visible"
         >
@@ -99,7 +99,7 @@ const LandingPage = () => {
           variants={textVariants}
           custom={1.2} // Delay after CHESSIFY animation
         >
-          "Join our online chess community to play, learn, and improve. <br />
+          "Join our online chess community to play, learn, and improve. <br className="hidden md:flex"/>
           Play against friends, AI, or players worldwide!"
         </motion.div>
 

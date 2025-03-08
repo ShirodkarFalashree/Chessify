@@ -5,6 +5,7 @@ import { Play, X } from "lucide-react"; // Lucide icons for Play & Close
 const YOUTUBE_API_KEY = "AIzaSyBzjXmQ3794a1Ux18S0DOZBjfGxFLyjxzE"; // Replace with your API key
 const PLAYLIST_ID = "PLBRObSmbZluSEeBkH17c72MaM4nFjqoi8"; // Replace with your Playlist ID
 import tablebg from "../assets/tablebg.png"
+import ytbg from "../assets/ytbg.jpeg"
 
 const Playlist = () => {
   const [videos, setVideos] = useState([]);
@@ -76,7 +77,7 @@ const Playlist = () => {
       {/* Modal for playing video */}
       {selectedVideo && (
         <div className="fixed inset-0 flex items-center justify-center backdrop-blur bg-opacity-50">
-          <div className="bg-white p-4 rounded-lg shadow-lg w-[90%] md:w-[600px] relative">
+          <div className="bg-cover bg-center p-4 rounded-lg w-[90%] md:w-[600px] relative " style={{ backgroundImage: `url(${ytbg})` }}>
             {/* Close Button */}
             <button
               onClick={() => setSelectedVideo(null)}

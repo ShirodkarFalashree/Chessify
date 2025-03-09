@@ -2,7 +2,7 @@ const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
-
+const { Chess } = require("chess.js");
 const app = express();
 app.use(cors());
 
@@ -21,8 +21,9 @@ io.on("connection", (socket) => {
   
     socket.on("joinGame", (gameId) => {
       if (!games[gameId]) {
-        games[gameId] = { players: [], moves: [] };
+        games[gameId] = { players: [], moves: [], chess: new Chess() };
       }
+    
   
       if (!games[gameId].players.includes(socket.id)) {
         if (games[gameId].players.length < 2) {
@@ -40,10 +41,24 @@ io.on("connection", (socket) => {
   
     socket.on("move", ({ gameId, move }) => {
       if (games[gameId]) {
-        games[gameId].moves.push(move);
-        io.to(gameId).emit("updateGame", move);
+        const game = games[gameId];
+        const chess = game.chess;
+    
+        const result = chess.move(move);
+        if (result) {
+          io.to(gameId).emit("updateGame", move);
+    
+          if (chess.isCheckmate()) {
+            const winner = chess.turn() === "w" ? "Black" : "White";
+            io.to(gameId).emit("gameOver", `Checkmate! ${winner} wins!`);
+          } else if (chess.isDraw() || chess.isStalemate()) {
+            io.to(gameId).emit("gameOver", "Game Over! It's a draw.");
+          }
+        }
       }
     });
+    
+    
   
     socket.on("disconnect", () => {
       console.log("User disconnected:", socket.id);

@@ -15,3 +15,39 @@
 body {
   font-family: var(--font-heading), sans-serif;
 }
+
+
+.Toastify__toast {
+  background-color: #f5deb3 !important; /* Parchment background */
+  color: #4a2c2a !important; /* Dark brown text */
+  border: 2px solid #8b4513 !important; /* Dark brown border */
+  font-family: 'Garamond', serif !important;
+  font-size: 16px !important;
+  text-align: center !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+.Toastify__progress-bar {
+  background: #8b4513 !important; /* Brown progress bar */
+}
+
+/* Change the tick mark (checkmark) color to brown */
+.Toastify__toast--success .Toastify__toast-icon svg {
+  fill: #8b4513 !important; /* Brown checkmark */
+}
+
+/* Vintage toast background and text */
+.Toastify__toast {
+  background-color: #f5deb3 !important; /* Parchment background */
+  color: #4a2c2a !important; /* Dark brown text */
+  border: 2px solid #8b4513 !important; /* Dark brown border */
+  font-family: 'Garamond', serif !important;
+  font-size: 16px !important;
+  text-align: center !important;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Change the progress bar color to brown */
+.Toastify__progress-bar {
+  background: #8b4513 !important; /* Brown progress bar */
+}

@@ -3,7 +3,7 @@ import { Chess } from 'chess.js';
 import { Chessboard } from 'react-chessboard';
 import { io } from 'socket.io-client';
 import button from '../assets/button.png'
-const socket = io("http://localhost:5000");
+const socket = io("https://chessify-08qf.onrender.com");
 
 function Game() {
   const [chess, setChess] = useState(new Chess());

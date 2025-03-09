@@ -1,10 +1,21 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import chess from "../assets/chess.png";
 import navbg from "../assets/navbg.jpeg";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
+
+
+  useEffect(() => {
+    if (location.pathname === "/multiplayer" && !sessionStorage.getItem("reloaded")) {
+      sessionStorage.setItem("reloaded", "true"); // Mark reload as done
+      window.location.reload();
+    } else if (location.pathname !== "/multiplayer") {
+      sessionStorage.removeItem("reloaded"); // Reset on path change
+    }
+  }, [location.pathname]);
 
   return (
     <div className="relative w-screen h-[60px] flex items-center justify-end px-6 pt-8 pr-8">

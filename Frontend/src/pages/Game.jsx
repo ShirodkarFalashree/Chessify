@@ -15,15 +15,6 @@ function Game() {
   const [gameOverMessage, setGameOverMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  useEffect(() => {
-    if (location.pathname === "/multiplayer") {
-      const hasRefreshed = sessionStorage.getItem("hasRefreshed");
-      if (!hasRefreshed) {
-        sessionStorage.setItem("hasRefreshed", "true");
-        window.location.reload(); // Refresh once per visit
-      }
-    }
-  }, [location.pathname]);
 
   useEffect(() => {
     if (location.pathname === "/multiplayer") {

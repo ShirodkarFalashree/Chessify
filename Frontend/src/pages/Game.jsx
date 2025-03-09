@@ -2,45 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { Chess } from 'chess.js';
 import { Chessboard } from 'react-chessboard';
 import { io } from 'socket.io-client';
-import { useLocation } from 'react-router-dom';
-import button from "../assets/button.png";
-
-const socket = io("http://localhost:5000", { autoConnect: false });
+import button from '../assets/button.png'
+const socket = io("http://localhost:5000");
 
 function Game() {
-  const location = useLocation();
   const [chess, setChess] = useState(new Chess());
   const [gameId] = useState("game1");
   const [playerColor, setPlayerColor] = useState(null);
-  const [gameOverMessage, setGameOverMessage] = useState("");
-  const [showModal, setShowModal] = useState(false);
-
+  const [gameOverMessage, setGameOverMessage] = useState(""); // Store winner message
+  const [showModal, setShowModal] = useState(false); // Modal state
 
   useEffect(() => {
-    if (location.pathname === "/multiplayer") {
-      socket.connect();
-      socket.emit("joinGame", "game1");
-
-      socket.on("assignColor", (color) => setPlayerColor(color));
-      socket.on("gameFull", () => alert("Game is full! Try another room."));
-      socket.on("updateGame", (move) => {
-        const newGame = new Chess(chess.fen());
-        newGame.move(move);
-        setChess(newGame);
-      });
-      socket.on("gameOver", (resultMessage) => {
-        setGameOverMessage(resultMessage);
-        setShowModal(true);
-      });
-    }
+    socket.emit("joinGame", "game1");
+  
+    socket.on("assignColor", (color) => setPlayerColor(color));
+    socket.on("gameFull", () => alert("Game is full! Try another room."));
+    socket.on("updateGame", (move) => {
+      const newGame = new Chess(chess.fen());
+      newGame.move(move);
+      setChess(newGame);
+    });
 
     return () => {
-      if (location.pathname !== "/multiplayer") {
-        socket.disconnect();
-        sessionStorage.removeItem("hasRefreshed"); // Allow refresh on next visit
-      }
+      socket.off("assignColor");
+      socket.off("gameFull");
+      socket.off("updateGame");
     };
-  }, [location.pathname, chess]);
+  }, [chess]);
 
   const handleMove = (move) => {
     if (playerColor && chess.turn() === playerColor) {
@@ -49,8 +37,9 @@ function Game() {
   
       if (result) {
         setChess(newGame);
-        socket.emit("move", { gameId: "game1", move });
+        socket.emit("move", { gameId, move });
 
+        // Check for game over
         if (newGame.isGameOver()) {
           let resultMessage = "";
           if (newGame.isCheckmate()) {
@@ -62,7 +51,7 @@ function Game() {
           }
 
           setGameOverMessage(resultMessage);
-          setShowModal(true);
+          setShowModal(true); // Show modal
           socket.emit("gameOver", { gameId, resultMessage });
         }
       }
@@ -72,7 +61,7 @@ function Game() {
   useEffect(() => {
     socket.on("gameOver", (resultMessage) => {
       setGameOverMessage(resultMessage);
-      setShowModal(true);
+      setShowModal(true); // Show modal when the game ends
     });
 
     return () => {
@@ -95,13 +84,14 @@ function Game() {
         />
       </div>
 
+      {/* Winner Modal */}
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center bg-transparent backdrop-blur bg-opacity-50">
-          <div className="p-6 rounded-lg bg-cover bg-center text-center" style={{ backgroundImage: `url(${button})` }}>
+        <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-opacity-50" >
+          <div className=" p-20 rounded-lg  text-center"style={{ backgroundImage: `url(${button})` }} >
             <h2 className="text-xl font-bold">{gameOverMessage}</h2>
             <button
               onClick={() => setShowModal(false)}
-              className="mt-4 px-4 py-2 bg-[#362511] text-white rounded-lg hover:bg-[#362511d0]"
+              className="mt-4 px-4 py-2 bg-[#362511] text-white rounded-lg"
             >
               Close
             </button>
